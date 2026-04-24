@@ -1,1 +1,99 @@
-<!-- Start writing your project code in this file! -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<div class="quiz-question">
+    <h2>Press start to play the quiz</h2>
+
+    <button type="button" onclick="nextQuestion(2)">Start</button>
+</div>
+
+<div id="question-2" class="quiz-question" style="display: none;">
+    <h2>What is the capital city of France?</h2>
+
+    <button type="button" onclick="nextQuestion(3)">Berlin</button>
+
+    <button type="button" onclick="addPoint(); nextQuestion(3)">Paris</button>
+
+    <button type="button" onclick="nextQuestion(3)">Warsaw</button>
+
+    <button type="button" onclick="nextQuestion(3)">Copenhagen</button>
+</div>
+    
+<div id="question-3" class="quiz-question" style="display: none;">
+    <h2>What is the world's most spoken language?</h2>
+
+    <button type="button" onclick="addPoint(); nextQuestion(4)">English</button>
+
+    <button type="button" onclick="nextQuestion(4)">Spanish</button>
+
+    <button type="button" onclick="nextQuestion(4)">Mandarin</button>
+
+    <button type="button" onclick="nextQuestion(4)">Hindi</button>
+</div>
+
+<div id="question-4" class="quiz-question" style="display: none;">
+    <h2>Who painted the Mona Lisa?</h2>
+
+    <button type="button" onclick="nextQuestion(5); submit()">Pablo Picasso</button>
+
+    <button type="button" onclick="nextQuestion(5); submit()">Vincent van Gogh</button>
+
+    <button type="button" onclick="addPoint(); nextQuestion(5); submit()">Leonardo da Vinci</button>
+
+    <button type="button" onclick="nextQuestion(5); submit()">Michelangelo</button>
+</div>
+
+<div id="question-5" class="quiz-question" style="display: none;">
+    <p id="score"></p>
+
+</div>
+
+</body>
+</html>
+<script>
+    var points = [];
+
+    function addPoint() {
+
+        points.push(Number(1));
+
+        console.log(points);
+
+    }
+
+    function nextQuestion(questionNumber) {
+
+        var questions = document.querySelectorAll('.quiz-question');
+
+        questions.forEach(question => {
+
+            question.style.display = 'none';
+
+        });
+
+        var nextQuestionDiv = document.getElementById('question-' + questionNumber);
+
+        if (nextQuestionDiv) {
+
+            nextQuestionDiv.style.display = 'block';
+
+        }
+
+    }
+
+    function submit() {
+
+        let sum = points.reduce((total, num) => total + num, 0);
+
+        console.log("Sum:", sum);
+
+        document.getElementById("score").innerText = "You scored a total of " + sum + " points!"
+
+    }
+
+</script>
