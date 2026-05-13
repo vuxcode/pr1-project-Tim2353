@@ -8,7 +8,7 @@
 <body>
 <div class="quiz-question">
     <h2>Press start to play the quiz</h2>
-
+    
     <button type="button" onclick="nextQuestion(2)">Start</button>
 </div>
 
@@ -56,18 +56,23 @@
 </body>
 </html>
 <script>
+    // This is an array for the points
     var points = [];
 
+    var timer;
+// This function runs when a correct answer is picked
     function addPoint() {
-
+// Pushes the number 1 into the array
         points.push(Number(1));
 
         console.log(points);
 
     }
-
+// This function switches questions
     function nextQuestion(questionNumber) {
 
+        clearTimeout(timer);
+//This variable returns all elements with the class name "quiz-question"
         var questions = document.querySelectorAll('.quiz-question');
 
         questions.forEach(question => {
@@ -81,6 +86,22 @@
         if (nextQuestionDiv) {
 
             nextQuestionDiv.style.display = 'block';
+
+        }
+
+        if (questionNumber <5){
+
+            timer = setTimeout(function (){
+
+                nextQuestion(questionNumber + 1);
+
+            }, 30000);
+    
+        }
+
+        if (questionNumber >4){
+
+            submit();
 
         }
 
