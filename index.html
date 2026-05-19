@@ -12,6 +12,8 @@
     <button type="button" onclick="nextQuestion(2)">Start</button>
 </div>
 
+<p id="countdownDisplay"></p>
+
 <div id="question-2" class="quiz-question" style="display: none;">
     <h2>What is the capital city of France?</h2>
 
@@ -56,23 +58,39 @@
 </body>
 </html>
 <script>
+
     // This is an array for the points
+
     var points = [];
 
     var timer;
+
+    var countdown;
+
+    var timeRemaining = 30;
+
 // This function runs when a correct answer is picked
+
     function addPoint() {
+
 // Pushes the number 1 into the array
+
         points.push(Number(1));
 
         console.log(points);
 
     }
+
 // This function switches questions
+
     function nextQuestion(questionNumber) {
 
         clearTimeout(timer);
+
+        clearInterval(countdown);
+
 //This variable returns all elements with the class name "quiz-question"
+
         var questions = document.querySelectorAll('.quiz-question');
 
         questions.forEach(question => {
@@ -85,7 +103,7 @@
 
         if (nextQuestionDiv) {
 
-            nextQuestionDiv.style.display = 'block';
+            nextQuestionDiv.style.display = "";
 
         }
 
@@ -97,6 +115,32 @@
 
             }, 30000);
     
+        }
+
+        timeRemaining = 30;
+
+        document.getElementById("countdownDisplay").style.display = "block";
+
+        document.getElementById("countdownDisplay").innerText = "Time remaining: " + timeRemaining;
+
+        countdown = setInterval(function() {
+
+            timeRemaining--;
+            
+            document.getElementById("countdownDisplay").innerText = "Time remaining: " + timeRemaining;
+
+            if (timeRemaining <=0) {
+
+                clearInterval(countdown);
+
+            }
+
+        }, 1000);
+
+        if (questionNumber >4){
+
+            document.getElementById("countdownDisplay").style.display = "none";
+
         }
 
         if (questionNumber >4){
