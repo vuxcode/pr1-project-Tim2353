@@ -22,7 +22,7 @@
 <button onclick="startQuiz()">Start</button>
 
 </div>
-    
+
 <div id="quizScreen" style="display:none;">
 
     <h2 id="question"></h2>
@@ -37,6 +37,12 @@
 
 </div>
 
+<div id="resultScreen" style="display:none;">
+
+    <h2 id="finalScore"></h2>
+
+</div>
+    
 </body>
 </html>
 <script>
@@ -54,7 +60,7 @@
     var score = 0 
 
     var currentQuestion = 0
-        
+
     function startQuiz() {
 
         document.getElementById("startScreen").style.display = "none";
@@ -77,5 +83,39 @@
     
     }
 
+    function checkAnswer(answer) {
+
+        if (answer === correctAnswers[currentQuestion]) {
+
+            score++;
+
+        }
+
+        currentQuestion++;
+
+        if (currentQuestion < questions.length) {
+
+            nextQuestion();
+
+        }
+
+        else { 
+            
+            showScore();
+        
+        }
+
+    }
+
+    function showScore(){
+
+        document.getElementById("quizScreen").style.display = "none";
+
+        document.getElementById("resultScreen").style.display = "block";
+
+        document.getElementById("finalScore").textContent = "You scored a total of " + score + " points!";
+
+    }
 
 </script>
+
